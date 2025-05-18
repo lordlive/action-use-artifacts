@@ -8,33 +8,34 @@ on:
     branches:
       - main
 
-env:
-	FILE_NAME: hello-server
-
 jobs:
-	build:
-		name: Build
-		runs-on: ubuntu-latest
-		steps:
-			- name: Checkout
-				uses: actions/checkout@v4
+  build:
+	name: Build
+	runs-on: ubuntu-latest
+	env:
+	  FILE_NAME: "hello-server"
+	steps:
+	  - name: Checkout
+		uses: actions/checkout@v4
 
-			- name: Build ${{ env.FILE_NAME }} for ubuntu
-				run: go build ${{ env.FILE_NAME }}.go
-			
-			- name: Upload artifact
-			  uses: actions/upload-artifact@v3
-				  with:
-						name: linux
-						path: ./${{ env.FILE_NAME}}
+	  - name: Build ${{ env.FILE_NAME }} for ubuntu
+		run: go build ${{ env.FILE_NAME }}.go
+	  
+	  - name: Upload artifact
+		uses: actions/upload-artifact@v3
+		with:
+		  name: linux
+		  path: ./${{ env.FILE_NAME }}
 
-	test:
-		name: test-linux
-		runs-on: ubuntu-latest
-		steps:
-			- name: Checkout
-			  uses: actions/checkout@v4
-			- name: download artifact
-			  uses: actions/download-artifact@v3
-			  with:
-				  name: linux
+  test:
+	name: test-linux
+	runs-on: ubuntu-latest
+	env:
+	  FILE_NAME: "hello-server"
+	steps:
+	  - name: Checkout
+		uses: actions/checkout@v4
+	  - name: download artifact
+		uses: actions/download-artifact@v3
+		with:
+		  name: linux
