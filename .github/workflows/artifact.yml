@@ -1,0 +1,38 @@
+name: artifacts
+
+on:
+	push:
+		branches: [ "rc-*"]
+	pull_request:
+		branches: [ "main"]
+
+env:
+	FILE_NAME: hello-server
+
+jobs:
+	build:
+		name: Build
+		runs-on: ubuntu-latest
+		steps:
+			- name: Checkout
+				uses: actions/checkout@v4
+
+			- name: Build ${{ env.FILE_NAME }} for ubuntu
+				run: go build ${{ env.FILE_NAME }}.go
+			
+			- name: Upload artifact
+			  uses: actions/upload-artifact@v3
+				  with:
+						name: linux
+						path: ./${{ env.FILE_NAME}}
+
+	test:
+		name: test-linux
+		runs-on: ubuntu-latest
+		steps:
+			- name: Checkout
+			  uses: actions/checkout@v4
+			- name: download artifact
+			  uses: actions/download-artifact@v3
+			  with:
+				  name: linux
