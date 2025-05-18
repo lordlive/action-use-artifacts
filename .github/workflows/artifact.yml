@@ -1,10 +1,12 @@
 name: artifacts
 
 on:
-	push:
-		branches: [ "rc-*" ]
-	pull_request:
-		branches: [ "main" ]
+  push:
+    branches:
+      - rc-*
+  pull_request:
+    branches:
+      - main
 
 env:
 	FILE_NAME: hello-server
