@@ -27,7 +27,7 @@ jobs:
       run: mkdir first second
 
     - name: Create File
-      run: touch first/empty.file
+      run: touch first/.empty second/.empty
     - name: List files
       run: ls -la
 
