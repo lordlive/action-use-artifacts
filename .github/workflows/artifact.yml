@@ -20,17 +20,22 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v4
 
-    - name: Build ${{ env.FILE_NAME }} for ubuntu-latest
-      run: go build ${{ env.FILE_NAME }}.go
+    # - name: Build ${{ env.FILE_NAME }} for ubuntu-latest
+    #   run: go build ${{ env.FILE_NAME }}.go
 
-    - name: add directory
-      run: mkdir test_path
+    - name: add empty directory
+      run: mkdir first second
+
+    - name: Create File
+      run: touch first/empty.file
+    - name: List files
+      run: ls -la
 
     - name: Upload artifact for linux
       uses: actions/upload-artifact@v4.6.2
       with:
         name: linux
-        path: "."
+        path: .
 
   test-linux:
     name: Test Linux
