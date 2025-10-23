@@ -30,7 +30,8 @@ jobs:
       run: touch first/empty second/.empty
     - name: List files
       run: ls -la
-
+    - name: Show variables
+      run: env
     - name: Upload artifact for linux
       uses: actions/upload-artifact@v4.6.2
       with:
