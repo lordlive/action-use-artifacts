@@ -53,3 +53,6 @@ jobs:
         name: linux
     - name: List files
       run: ls -la
+
+    - name: Show variables
+      run: echo "release branch is ${{ vars.RELEASE_BRANCH}}"
